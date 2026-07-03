@@ -1,6 +1,8 @@
-import 'package:instagram_clone/app/app.dart';
+import 'package:api_repository/api_repository.dart';
+import 'package:instagram_clone/app/view/app.dart';
 import 'package:instagram_clone/bootstrap.dart';
 
 Future<void> main() async {
-  await bootstrap(() => const App());
+  const apirespository = ApiRepository();
+  await bootstrap(() => const App(apiRepository: apirespository,));
 }
