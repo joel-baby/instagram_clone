@@ -1,15 +1,29 @@
+import 'package:api_repository/api_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:instagram_clone/todos/cubit/todos_cubit.dart';
 
-class ViewTodos extends StatefulWidget {
-  const ViewTodos({super.key});
+class TodosPage extends StatelessWidget {
+  const TodosPage({super.key});
 
   @override
-  State<ViewTodos> createState() => _ViewTodosState();
+  Widget build(BuildContext context) {
+    return  BlocProvider(
+      create: (context) => TodosCubit(apiRepository: context.read<ApiRepository>(),
+      ),
+      child: const TodosView(),
+    );
+  }
 }
 
-class _ViewTodosState extends State<ViewTodos> {
+class TodosView extends StatefulWidget {
+  const TodosView({super.key});
+
+  @override
+  State<TodosView> createState() => _TodosViewState();
+}
+
+class _TodosViewState extends State<TodosView> {
   @override
   void initState() {
     super.initState();
