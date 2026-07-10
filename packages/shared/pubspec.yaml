@@ -12,3 +12,4 @@ dev_dependencies:
   very_good_analysis: ^10.3.0
 dependencies:
   logger: ^2.7.0
+  powersync: ^2.3.1

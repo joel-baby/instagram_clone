@@ -31,6 +31,12 @@ migrate_working_dir/
 /build/
 pubspec.lock
 
+.env.prod
+.env.dev
+
+lib/src/env.dev.g.dart
+lib/src/env.prod.g.dart
+
 # Web related
 lib/generated_plugin_registrant.dart
 
