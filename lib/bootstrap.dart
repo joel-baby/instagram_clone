@@ -3,6 +3,12 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:flutter/widgets.dart';
+import 'package:powersync_repository/powersync_repository.dart';
+import 'package:shared/shared.dart';
+
+typedef AppBuilder = FutureOr<Widget> Function(
+  PowerSyncRepository,
+);
 
 class AppBlocObserver extends BlocObserver {
   const AppBlocObserver();
@@ -20,7 +26,10 @@ class AppBlocObserver extends BlocObserver {
   }
 }
 
-Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
+Future<void> bootstrap(
+  Appbuilder builder, {
+  required bool isDev,
+}) async {
   FlutterError.onError = (details) {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
@@ -29,5 +38,17 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
 
   // Add cross-flavor configuration here
 
-  runApp(await builder());
+  await runZonedGuarded(
+    () async {
+      WidgetsFlutterBinding.ensureInitialized();
+
+      final powerSyncRepository = PowerSyncRepository(env: isDev);
+      await powerSyncRepository.initialize();
+
+      runApp(await builder(powerSyncRepository));
+    },
+    (error, stack) {
+      logE(error.toString(), stackTrace: stack);
+    },
+  );
 }
