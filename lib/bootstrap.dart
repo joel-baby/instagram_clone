@@ -27,7 +27,7 @@ class AppBlocObserver extends BlocObserver {
 }
 
 Future<void> bootstrap(
-  Appbuilder builder, {
+  AppBuilder builder, {
   required bool isDev,
 }) async {
   FlutterError.onError = (details) {

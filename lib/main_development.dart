@@ -4,5 +4,10 @@ import 'package:instagram_clone/bootstrap.dart';
 
 Future<void> main() async {
   const apirespository = ApiRepository();
-  await bootstrap(() => const App(apiRepository: apirespository,));
+  await bootstrap(
+    (powersyncRepository) {
+      return const App(apiRepository: apirespository);
+    },
+    isDev: true,
+  );
 }
