@@ -20,7 +20,7 @@ dependencies:
     path: packages/powersync_repository
   flutter_localizations:
     sdk: flutter
-  intl: ^0.20.2
+  intl: ^0.20.3
 
 dev_dependencies:
   bloc_lint: ^0.4.1
